@@ -2,96 +2,136 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>Welcome J.N</title>
   <style>
-    /* RESET & UTILITY */
+    /* Reset & Basics */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body, html { width: 100%; height: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    html, body { height: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    /* Allow full scrolling on mobile */
+    body { overflow-y: auto; }
 
-    /* SCREEN CONTAINERS */
+    /* Screen containers */
     .screen {
-      position: absolute; top: 0; left: 0;
-      width: 100%; height: 100%;
       display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      width: 100%;
+      min-height: 100%;
       background-size: cover;
       background-position: center;
       color: #fff;
       text-align: center;
-      padding: 1rem;
+      padding: 2rem;
+      flex-direction: column;
+      justify-content: flex-start; /* Changed from center to ensure content starts at the top */
+      align-items: center;
+      overflow-y: auto;
+      position: fixed; /* Fixed position to handle mobile scroll issues */
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
     }
-    .screen.visible { display: flex; }
+    .active { display: flex; }
 
-    /* TEXT */
-    h1, h2 { text-shadow: 2px 2px 6px rgba(0,0,0,0.5); }
-    h1 { font-size: 3rem; }
-    h2 { font-size: 2rem; margin-bottom: 1.5rem; }
-    p, li { font-size: 1.25rem; text-shadow: 1px 1px 4px rgba(0,0,0,0.4); }
-    ul { list-style: none; margin-bottom: 2rem; }
-    li { margin: 0.5rem 0; }
+    h1 { 
+      font-size: 3rem; 
+      margin: 2rem 0; /* Changed from margin-bottom to ensure spacing above and below */
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+      padding-top: 1rem; /* Added padding to ensure text isn't cut off */
+    }
 
-    /* BUTTONS */
+    /* Buttons */
     .btn {
-  padding: 0.75rem 2rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-  background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.15));
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.4);
-  border-radius: 40px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-  margin: 0.75rem 1rem; 
-}
+      padding: 0.75rem 1.5rem;
+      margin: 0.5rem;
+      border: 2px solid #fff;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      border-radius: 999px;
+      opacity: 0; /* Start with buttons hidden */
+      pointer-events: none; /* Prevent interaction until visible */
+    }
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+    }
+    .btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transition: opacity 0.5s ease;
+    }
 
-.btn:hover {
-  background: linear-gradient(135deg, rgba(255,255,255,0.35), rgba(255,255,255,0.25));
-  box-shadow: 0 12px 24px rgba(0,0,0,0.25);
-  transform: translateY(-3px) scale(1.03);
-}
+    /* Content styling */
+    .content {
+      max-width: 600px;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      margin-top: 1rem; /* Added space from the header */
+      padding-bottom: 3rem; /* Ensure there's space at the bottom */
+    }
+    ul { 
+      list-style: none; 
+      font-size: 1.25rem; 
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+      margin-bottom: auto; /* Push to top */
+    }
+    li { margin: 0.5rem 0; }
+    p {
+      font-size: 1.25rem;
+      margin: 1rem 0;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+      word-wrap: break-word;
+    }
 
-
-    /* BACKGROUNDS (replace with your URLs) */
-    #welcome   { background: url('https://www.pixelstalk.net/wp-content/uploads/images6/Black-Wallpaper-Aesthetic-Wallpaper-HD-Fuji-Moutain.jpg') no-repeat center/cover; }
-    #prompt    { background: url('https://img.freepik.com/premium-photo/sit-enjoy-mountain-scenery-while-drinking-hot-drink-girl-stone-holds-mug-tea-her-hands-looks-mountain-pasture-admire-natural-surroundings_161422-4946.jpg') no-repeat center/cover; }
-    #likes     { background: url('https://wallpapershome.com/images/pages/pic_h/12006.jpg')   no-repeat center/cover; }
-    #message   { background: url('https://4kwallpapers.com/images/wallpapers/butterfly-neon-glowing-dark-background-amoled-1920x1080-2171.png') no-repeat center/cover; }
-
-    /* RESPONSIVE */
-    @media (max-width: 600px) {
-      h1 { font-size: 2.5rem; }
-      h2 { font-size: 1.75rem; }
-      .btn { width: 80%; font-size: 0.9rem; }
+    /* Responsive adjustments */
+    @media(max-width: 600px) {
+      h1 { 
+        font-size: 2.25rem; 
+        margin: 1rem 0; /* Reduced margins on mobile */
+      }
+      .btn { 
+        width: 80%; /* Not full width to avoid overflow issues */
+        margin: 0.5rem auto;
+      }
+      .content { 
+        padding: 1rem 0 4rem 0; /* Added padding to ensure content is visible */
+        width: 100%;
+      }
+      p { 
+        font-size: 1rem; 
+        padding: 0 0.5rem; /* Added side padding for text */
+      }
+      .screen {
+        padding: 1rem;
+        overflow-y: scroll; /* Ensure scrolling works on mobile */
+        -webkit-overflow-scrolling: touch; /* For smoother scrolling on iOS */
+      }
     }
   </style>
 </head>
 <body>
-  <!-- 1. Welcome Screen -->
-  <div id="welcome" class="screen visible">
+  <!-- Welcome Screen -->
+  <div id="welcome" class="screen active" style="background-image: url('https://www.pixelstalk.net/wp-content/uploads/images6/Black-Wallpaper-Aesthetic-Wallpaper-HD-Fuji-Moutain.jpg');">
     <h1>WELCOME J.N</h1>
+    <div class="content">
+      <button id="likesBtn" class="btn" onclick="showScreen('likes')">Things J.N Likes</button>
+      <button id="messageBtn" class="btn" onclick="showScreen('message')">A Special Message</button>
+    </div>
   </div>
 
-  <!-- 2. Prompt Screen -->
-  <div id="prompt" class="screen">
-    <h2>I'm sorry J.N, please click one of the buttons below</h2>
-    <button class="btn" onclick="navigate('likes')">Things You Like</button>
-    <button class="btn" onclick="navigate('message')">Apology Form</button>
-  </div>
-
-  <!-- 3. Likes Screen -->
-  <div id="likes" class="screen">
-    <h2>Facst About you </h2>
-    <ul>
-        <li>Birthday 9-oct</li>
-        </ul>
-    <h2>Things J.N Likes</h2>
-    <ul>
-      <li>😊Being Alone</li>
+  <!-- Likes Screen -->
+  <div id="likes" class="screen" style="background-image: url('https://wallpapershome.com/images/pages/pic_h/12006.jpg');">
+    <h1>Things J.N Likes</h1>
+    <div class="content">
+      <ul>
+        <h1>Born 9-oct </h1>
+        <h2>Things you like</h2>
+        <li>😊Being Alone</li>
       <li>📚Being Quiet</li>
       <li>🎵Tea</li>
       <li>🚀Tulips</li>
@@ -100,43 +140,53 @@
         <li>🎵Forest</li>
         <li>🚀Lakes</li>
         <li>🚀Black Color</li>
-      
-    </ul>
-    <button class="btn" onclick="navigate('prompt')">Back</button>
+      </ul>
+      <button class="btn visible" onclick="showScreen('welcome')">Back</button>
+    </div>
   </div>
 
-  <!-- 4. Message Screen -->
-  <div id="message" class="screen">
-    <h2>Apology & Explanation Message</h2>
-    <p>
-        I want to begin by apologizing. I know what happened scared you, and I truly regret it. I understand you’re going through tough times, and the last thing I wanted was to add to your stress. It was a horrendous mistake, completely unintentional, and I never meant to hurt or scare you.
+  <!-- Message Screen -->
+  <div id="message" class="screen" style="background-image: url('https://4kwallpapers.com/images/wallpapers/butterfly-neon-glowing-dark-background-amoled-1920x1080-2171.png');">
+    <h1>Just For You</h1>
+    <div class="content">
+      <!-- Write your own special text below -->
+      <p> I want to begin by apologizing. I know what happened scared you, and I truly regret it. I understand you're going through tough times, and the last thing I wanted was to add to your stress. It was a horrendous mistake, completely unintentional, and I never meant to hurt or scare you.
 
-I’ve already lost you once, and I can't bear the thought of losing you again. I couldn't sleep last night, realizing how deeply this has affected you, and I want to find a way to make things right. You don’t have to take responsibility for me, I promise. I stayed true to my word when I said I wouldn’t get attached, and I didn’t.
-
-Please, I’m asking for one more chance. Nothing like this will ever happen again. I’ll make sure nothing from my side bothers you. I still remember the first time I talked to you—I got butterflies. I always think about how lucky those who had you were. If I were them, I’d never let you go because you’re worth so much.
-
-I won’t take you for granted. I won’t give up on you. You’re so special to me.
-
-What happened with me was scary. I lost track of my thoughts and got overwhelmed. I was too scared to inform you I was going offline, and in that moment, I panicked. It wasn’t intentional. I never meant to make you feel abandoned.
-
-I know you’ve already given me a chance, and I don’t take that lightly. If you can find it in your heart to give me one last chance, I’ll make sure this never happens again. I don’t want to lose you over my mistake. This regret will haunt me forever.
-
-Please forgive me. I promise this will never happen again. Take your time. I’ll wait as long as I need to, but please don’t abandon me. I made a mistake, but I can promise it won’t happen again  
-  </p>
-    <button class="btn" onclick="navigate('prompt')">Back</button>
+        I've already lost you once, and I can't bear the thought of losing you again. I couldn't sleep last night, realizing how deeply this has affected you, and I want to find a way to make things right. You don't have to take responsibility for me, I promise. I stayed true to my word when I said I wouldn't get attached, and I didn't.
+        
+        Please, I'm asking for one more chance. Nothing like this will ever happen again. I'll make sure nothing from my side bothers you. I still remember the first time I talked to you—I got butterflies. I always think about how lucky those who had you were. If I were them, I'd never let you go because you're worth so much.
+        
+        I won't take you for granted. I won't give up on you. You're so special to me.
+        
+        What happened with me was scary. I lost track of my thoughts and got overwhelmed. I was too scared to inform you I was going offline, and in that moment, I panicked. It wasn't intentional. I never meant to make you feel abandoned.
+        
+        I know you've already given me a chance, and I don't take that lightly. If you can find it in your heart to give me one last chance, I'll make sure this never happens again. I don't want to lose you over my mistake. This regret will haunt me forever.
+        
+        Please forgive me. I promise this will never happen again. Take your time. I'll wait as long as I need to, but please don't abandon me. I made a mistake, but I can promise it won't happen again  
+          </p>
+      <button class="btn visible" onclick="showScreen('welcome')">Back</button>
+    </div>
   </div>
 
   <script>
-    const showScreen = id => {
-      document.querySelectorAll('.screen').forEach(el => el.classList.remove('visible'));
-      document.getElementById(id).classList.add('visible');
-    };
-
-    const navigate = id => showScreen(id);
-
-    document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(() => showScreen('prompt'), 2000);
-    });
+    // Hide buttons on welcome screen initially
+    document.getElementById('likesBtn').classList.remove('visible');
+    document.getElementById('messageBtn').classList.remove('visible');
+    
+    // Show buttons after 2 seconds
+    setTimeout(function() {
+      document.getElementById('likesBtn').classList.add('visible');
+      document.getElementById('messageBtn').classList.add('visible');
+    }, 2000);
+    
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      // Scroll to top when changing screens to ensure content is visible
+      window.scrollTo(0, 0);
+      // Reset scroll position of the newly active screen
+      document.getElementById(id).scrollTop = 0;
+    }
   </script>
 </body>
 </html>
