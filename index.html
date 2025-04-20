@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome J.N</title>
+  <style>
+    /* RESET & UTILITY */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html { width: 100%; height: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+    /* SCREEN CONTAINERS */
+    .screen {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+    }
+    .screen.visible { display: flex; }
+
+    /* TEXT */
+    h1, h2 { text-shadow: 2px 2px 6px rgba(0,0,0,0.5); }
+    h1 { font-size: 3rem; }
+    h2 { font-size: 2rem; margin-bottom: 1.5rem; }
+    p, li { font-size: 1.25rem; text-shadow: 1px 1px 4px rgba(0,0,0,0.4); }
+    ul { list-style: none; margin-bottom: 2rem; }
+    li { margin: 0.5rem 0; }
+
+    /* BUTTONS */
+    .btn {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.15));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 40px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  margin: 0.75rem 1rem; 
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, rgba(255,255,255,0.35), rgba(255,255,255,0.25));
+  box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+  transform: translateY(-3px) scale(1.03);
+}
+
+
+    /* BACKGROUNDS (replace with your URLs) */
+    #welcome   { background: url('https://www.pixelstalk.net/wp-content/uploads/images6/Black-Wallpaper-Aesthetic-Wallpaper-HD-Fuji-Moutain.jpg') no-repeat center/cover; }
+    #prompt    { background: url('https://img.freepik.com/premium-photo/sit-enjoy-mountain-scenery-while-drinking-hot-drink-girl-stone-holds-mug-tea-her-hands-looks-mountain-pasture-admire-natural-surroundings_161422-4946.jpg') no-repeat center/cover; }
+    #likes     { background: url('https://wallpapershome.com/images/pages/pic_h/12006.jpg')   no-repeat center/cover; }
+    #message   { background: url('https://4kwallpapers.com/images/wallpapers/butterfly-neon-glowing-dark-background-amoled-1920x1080-2171.png') no-repeat center/cover; }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      h1 { font-size: 2.5rem; }
+      h2 { font-size: 1.75rem; }
+      .btn { width: 80%; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 1. Welcome Screen -->
+  <div id="welcome" class="screen visible">
+    <h1>WELCOME J.N</h1>
+  </div>
+
+  <!-- 2. Prompt Screen -->
+  <div id="prompt" class="screen">
+    <h2>I'm sorry J.N, please click one of the buttons below</h2>
+    <button class="btn" onclick="navigate('likes')">Things You Like</button>
+    <button class="btn" onclick="navigate('message')">Apology Form</button>
+  </div>
+
+  <!-- 3. Likes Screen -->
+  <div id="likes" class="screen">
+    <h2>Facst About you </h2>
+    <ul>
+        <li>Birthday 9-oct</li>
+        </ul>
+    <h2>Things J.N Likes</h2>
+    <ul>
+      <li>😊Being Alone</li>
+      <li>📚Being Quiet</li>
+      <li>🎵Tea</li>
+      <li>🚀Tulips</li>
+      <li>😊Butterflies</li>
+        <li>📚Mountains</li>
+        <li>🎵Forest</li>
+        <li>🚀Lakes</li>
+        <li>🚀Black Color</li>
+      
+    </ul>
+    <button class="btn" onclick="navigate('prompt')">Back</button>
+  </div>
+
+  <!-- 4. Message Screen -->
+  <div id="message" class="screen">
+    <h2>Apology & Explanation Message</h2>
+    <p>
+        "I want to begin by apologizing, and I know what happend scared you, but I want you to know I understand you’re going through tough times yourself. What happened was a horrendous mistake, and I wasn’t trying to hurt you or scare you. It was completely unintentional.
+
+        I've already lost you once, and I can't bear the thought of losing you again. I couldn't sleep all night thinking about this, and I realized I needed to find a way to apologize sincerely. You don’t have to take any responsibility for me, I promise. I stayed true to my word when I said I wouldn’t get attached,and i didnt.
+        
+        Please, I’m asking for one more chance. Nothing like this will ever happen again, I swear. Nothing from my side will ever bother you again.
+        
+        I still remember the first time I talked to you, and for the first time in my life, I got butterflies talking to someone. I always think about how lucky the people who had you must be. If I were them, I’d never let you go. because you’re worth that and so much more.
+        
+        I will never, ever take you for granted. I promise that I won't let you go like they did. I won’t give up on you. You’re so incredibly special to me.
+        
+        What happened with me was scary, and I lost track of my thoughts completely. I got so overwhelmed and was scared, and in that moment, I completely forgot to inform you that I was going offline. It wasn’t intentional, I just... panicked. I never meant to cause you any distress or make you feel abandoned.
+        
+        I know you’ve already given me a chance, and I don’t take that lightly. What happened was unprecedented, but if you can find it in your heart to give me one last chance, I will make sure I never disappoint you again. I won’t cause you any more trouble, and I don’t want to lose you because of my mistake. This regret will haunt me for the rest of my life.
+        
+        Please forgive me, and I promise I will never, ever repeat this mistake. It was unintentional Nothing like this has happened before and i promise it wont happen ever again take your time i can wait as long as ive to for you ,just dont abandon me i know its difficult for you to forgive but i made a mistake i can only promise it wont happen again.  
+  </p>
+    <button class="btn" onclick="navigate('prompt')">Back</button>
+  </div>
+
+  <script>
+    const showScreen = id => {
+      document.querySelectorAll('.screen').forEach(el => el.classList.remove('visible'));
+      document.getElementById(id).classList.add('visible');
+    };
+
+    const navigate = id => showScreen(id);
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => showScreen('prompt'), 1000);
+    });
+  </script>
+</body>
+</html>
