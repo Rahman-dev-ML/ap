@@ -35,9 +35,19 @@
 
     h1 { 
       font-size: 3rem; 
-      margin: 2rem 0; /* Changed from margin-bottom to ensure spacing above and below */
+      margin: 1rem 0 0.5rem 0; /* Adjusted margin to move text down */
       text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
       padding-top: 1rem; /* Added padding to ensure text isn't cut off */
+    }
+
+    .subtitle {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    }
+
+    .welcome-container {
+      margin-top: 4rem; /* Move welcome text down */
     }
 
     /* Buttons */
@@ -58,7 +68,7 @@
       background: rgba(255, 255, 255, 0.2);
       transform: translateY(-3px);
     }
-    .btn.visible {
+    .btn.visible, .instruction.visible {
       opacity: 1;
       pointer-events: auto;
       transition: opacity 0.5s ease;
@@ -74,6 +84,14 @@
       margin-top: 1rem; /* Added space from the header */
       padding-bottom: 3rem; /* Ensure there's space at the bottom */
     }
+    
+    .instruction {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+      opacity: 0; /* Start with instructions hidden */
+    }
+    
     ul { 
       list-style: none; 
       font-size: 1.25rem; 
@@ -92,7 +110,14 @@
     @media(max-width: 600px) {
       h1 { 
         font-size: 2.25rem; 
-        margin: 1rem 0; /* Reduced margins on mobile */
+        margin: 1rem 0 0.5rem 0; /* Reduced margins on mobile */
+      }
+      .subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+      .welcome-container {
+        margin-top: 3rem; /* Adjusted for mobile */
       }
       .btn { 
         width: 80%; /* Not full width to avoid overflow issues */
@@ -117,10 +142,14 @@
 <body>
   <!-- Welcome Screen -->
   <div id="welcome" class="screen active" style="background-image: url('https://www.pixelstalk.net/wp-content/uploads/images6/Black-Wallpaper-Aesthetic-Wallpaper-HD-Fuji-Moutain.jpg');">
-    <h1>WELCOME J.N</h1>
+    <div class="welcome-container">
+      <h1>WELCOME J.N</h1>
+      <div class="subtitle">I'M SORRY J.N :( </div>
+    </div>
     <div class="content">
+      <p id="instruction" class="instruction">Click the following buttons, I hope this melts your heart and i hope and pray you unblock me after this </p>
       <button id="likesBtn" class="btn" onclick="showScreen('likes')">Things J.N Likes</button>
-      <button id="messageBtn" class="btn" onclick="showScreen('message')">A Special Message</button>
+      <button id="messageBtn" class="btn" onclick="showScreen('message')">An Apology Message</button>
     </div>
   </div>
 
@@ -147,36 +176,38 @@
 
   <!-- Message Screen -->
   <div id="message" class="screen" style="background-image: url('https://4kwallpapers.com/images/wallpapers/butterfly-neon-glowing-dark-background-amoled-1920x1080-2171.png');">
-    <h1>Just For You</h1>
+    <h1>Apology Message</h1>
     <div class="content">
       <!-- Write your own special text below -->
-      <p> I want to begin by apologizing. I know what happened scared you, and I truly regret it. I understand you're going through tough times, and the last thing I wanted was to add to your stress. It was a horrendous mistake, completely unintentional, and I never meant to hurt or scare you.
+      <p> I want to begin by apologizing. I know what happened scared you, and I deeply regret it. I understand you're going through tough times, and the last thing I wanted was to add to your stress. It was an unintentional mistake, and I never meant to hurt or scare you.
 
-        I've already lost you once, and I can't bear the thought of losing you again. I couldn't sleep last night, realizing how deeply this has affected you, and I want to find a way to make things right. You don't have to take responsibility for me, I promise. I stayed true to my word when I said I wouldn't get attached, and I didn't.
+        I’ve already lost you once, and I can’t bear the thought of losing you again. I couldn’t sleep last night, realizing how much this has affected you. You don’t have to take responsibility for me—I stayed true to my word when I said I wouldn’t get attached, and I didn’t.
         
-        Please, I'm asking for one more chance. Nothing like this will ever happen again. I'll make sure nothing from my side bothers you. I still remember the first time I talked to you—I got butterflies. I always think about how lucky those who had you were. If I were them, I'd never let you go because you're worth so much.
+        Please, I’m asking for one more chance. Nothing like this will ever happen again. I’ll make sure nothing from my side bothers you. I still remember the first time I talked to you, and how lucky those who had you were. If I were them, I’d never let you go because you’re worth so much.
         
-        I won't take you for granted. I won't give up on you. You're so special to me.
+        I won’t take you for granted. I won’t give up on you. You’re incredibly special to me.
         
-        What happened with me was scary. I lost track of my thoughts and got overwhelmed. I was too scared to inform you I was going offline, and in that moment, I panicked. It wasn't intentional. I never meant to make you feel abandoned.
+        What happened with me was scary. I got overwhelmed and forgot to inform you I was going offline—I panicked. It wasn’t intentional, and I never meant to make you feel abandoned.
         
-        I know you've already given me a chance, and I don't take that lightly. If you can find it in your heart to give me one last chance, I'll make sure this never happens again. I don't want to lose you over my mistake. This regret will haunt me forever.
+        I know you’ve already given me a chance, and I don’t take that lightly. If you can find it in your heart to give me one last chance, I’ll make sure this never happens again. I don’t want to lose you over my mistake. This regret will haunt me forever.
         
-        Please forgive me. I promise this will never happen again. Take your time. I'll wait as long as I need to, but please don't abandon me. I made a mistake, but I can promise it won't happen again  
+        Please forgive me. I promise this won’t happen again. Take your time. I’ll wait as long as i have to I made a mistake, but I can promise it won’t happen again. Can you please forgive me? I know I don’t deserve it, but I’m asking for your forgiveness. Please unblock me.</p>    
           </p>
       <button class="btn visible" onclick="showScreen('welcome')">Back</button>
     </div>
   </div>
 
   <script>
-    // Hide buttons on welcome screen initially
+    // Hide buttons and instruction on welcome screen initially
     document.getElementById('likesBtn').classList.remove('visible');
     document.getElementById('messageBtn').classList.remove('visible');
+    document.getElementById('instruction').classList.remove('visible');
     
-    // Show buttons after 2 seconds
+    // Show buttons and instruction after 2 seconds
     setTimeout(function() {
       document.getElementById('likesBtn').classList.add('visible');
       document.getElementById('messageBtn').classList.add('visible');
+      document.getElementById('instruction').classList.add('visible');
     }, 2000);
     
     function showScreen(id) {
